@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Housing Price Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='enhancements.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header id="head1" style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 15px 0;">
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="brand">
+                <h2 style="margin: 0; color: #2C3E50; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.8rem;">🏠</span> Housing Predictor
+                </h2>
+            </div>
+            <nav style="display: flex; gap: 30px; align-items: center;">
+                <a href="/" style="color: #2C3E50; text-decoration: none; font-weight: 600;">Home</a>
+
+                <a href="/rent" style="color: #2C3E50; text-decoration: none; font-weight: 600;">Rent</a>
+                <a href="/contact" style="color: #2C3E50; text-decoration: none; font-weight: 600;">Contact</a>
+                <a href="/admin"
+                    style="color: #2C3E50; text-decoration: none; font-weight: 600; text-decoration: underline;">Admin</a>
+                <div id="user-profile" style="position: relative;">
+                    <button id="profile-btn"
+                        style="background: #2C3E50; color: #F4D03F; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                        <span>👤</span><span id="user-name-display">{{ user.name }}</span>
+                    </button>
+                    <div id="dropdown-menu"
+                        style="display: none; position: absolute; top: 45px; right: 0; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 180px; z-index: 1000;">
+                        <a href="/logout" id="dropdown-signout"
+                            style="display: block; width: 100%; padding: 12px 15px; border: none; background: none; color: #e74c3c; font-weight: 600; cursor: pointer; text-align: left; border-radius: 0 0 10px 10px; text-decoration: none;">
+                            🚪 Sign Out
+                        </a>
+                    </div>
+                </div>
+                <a href="/about" style="color: #2C3E50; text-decoration: none; font-weight: 600;">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container-fluid" style="margin-top: 30px; padding-bottom: 50px;">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="about-page-content">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h3 class="page-title" style="margin: 0;">📊 Admin Dashboard</h3>
+                        <span
+                            style="background: #e1f5fe; color: #0288d1; padding: 5px 15px; border-radius: 20px; font-weight: 600; font-size: 0.9rem;">
+                            Live System Status
+                        </span>
+                    </div>
+
+                    <!-- Stats Row -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="stat-card"
+                                style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid #667eea; margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div>
+                                        <div class="stat-label" style="color: #888; font-size: 0.9rem;">Total Users
+                                        </div>
+                                        <div class="stat-value"
+                                            style="font-size: 1.8rem; font-weight: bold; color: #2C3E50;">
+                                            {{ stats.total_users }}</div>
+                                    </div>
+                                    <div class="stat-icon"
+                                        style="font-size: 1.5rem; background: #eef2ff; padding: 10px; border-radius: 10px;">
+                                        👥</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card"
+                                style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid #f5576c; margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div>
+                                        <div class="stat-label" style="color: #888; font-size: 0.9rem;">Total Tickets
+                                        </div>
+                                        <div class="stat-value"
+                                            style="font-size: 1.8rem; font-weight: bold; color: #2C3E50;">
+                                            {{ stats.total_tickets }}</div>
+                                    </div>
+                                    <div class="stat-icon"
+                                        style="font-size: 1.5rem; background: #fff0f3; padding: 10px; border-radius: 10px;">
+                                        🎫</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card"
+                                style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid #f39c12; margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div>
+                                        <div class="stat-label" style="color: #888; font-size: 0.9rem;">Pending
+                                        </div>
+                                        <div class="stat-value"
+                                            style="font-size: 1.8rem; font-weight: bold; color: #2C3E50;">
+                                            {{ stats.pending_tickets }}</div>
+                                    </div>
+                                    <div class="stat-icon"
+                                        style="font-size: 1.5rem; background: #fff8e1; padding: 10px; border-radius: 10px;">
+                                        ⏳</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card"
+                                style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid #27ae60; margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div>
+                                        <div class="stat-label" style="color: #888; font-size: 0.9rem;">Resolved
+                                        </div>
+                                        <div class="stat-value"
+                                            style="font-size: 1.8rem; font-weight: bold; color: #2C3E50;">
+                                            {{ stats.resolved_tickets }}</div>
+                                    </div>
+                                    <div class="stat-icon"
+                                        style="font-size: 1.5rem; background: #e8f5e9; padding: 10px; border-radius: 10px;">
+                                        ✅</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts & Tickets Section -->
+                    <div class="row">
+                        <!-- Chart Section -->
+                        <div class="col-md-4">
+                            <div class="content-card"
+                                style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; height: 100%;">
+                                <h5 style="margin-bottom: 20px; color: #2C3E50; font-weight: 700;">
+                                    📈 Ticket Analytics</h5>
+                                <div style="position: relative; height: 250px; width: 100%;">
+                                    <canvas id="ticketChart"></canvas>
+                                </div>
+                                <div style="margin-top: 20px; text-align: center;">
+                                    <p style="font-size: 0.9rem; color: #666;">Overview of
+                                        support request status.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tickets Section -->
+                        <div class="col-md-8">
+                            <div class="content-card"
+                                style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px;">
+                                    <h5 style="margin: 0; color: #2C3E50; font-weight: 700;">🎫
+                                        User Help Requests</h5>
+                                    <div style="background: #f8f9fa; padding: 5px; border-radius: 10px;">
+                                        <button id="pending-tab" onclick="showTab('pending')"
+                                            style="padding: 8px 16px; background: #2C3E50; color: white; border: none; cursor: pointer; font-weight: 600; border-radius: 8px; font-size: 0.9rem; transition: all 0.3s;">Pending</button>
+                                        <button id="resolved-tab" onclick="showTab('resolved')"
+                                            style="padding: 8px 16px; background: transparent; color: #666; border: none; cursor: pointer; font-weight: 600; border-radius: 8px; font-size: 0.9rem; transition: all 0.3s;">Resolved</button>
+                                    </div>
+                                </div>
+
+                                <div id="tickets-container"
+                                    style="max-height: 600px; overflow-y: auto; padding-right: 5px;">
+                                    <p id="loading-tickets" style="text-align: center; color: #888; padding: 40px;">
+                                        Loading tickets...</p>
+                                    <div id="tickets-list" style="display: none;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
+    <!-- Reply Modal -->
+    <div id="replyModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center;">
+        <div
+            style="background: white; width: 90%; max-width: 500px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: slideIn 0.3s ease-out;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h4 style="margin: 0; color: #2C3E50;">📧 Reply to User</h4>
+                <button onclick="closeReplyModal()"
+                    style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #888;">&times;</button>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #666;">To:</label>
+                <input type="text" id="reply-email" readonly
+                    style="width: 100%; padding: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; color: #555;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #666;">Subject:</label>
+                <input type="text" id="reply-subject" readonly
+                    style="width: 100%; padding: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; color: #555;">
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #666;">Your
+                    Message:</label>
+                <textarea id="reply-message" rows="5"
+                    style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; resize: vertical;"
+                    placeholder="Type your response here..."></textarea>
+            </div>
+            <div style="text-align: right;">
+                <button onclick="closeReplyModal()"
+                    style="padding: 10px 20px; background: #95a5a6; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-right: 10px;">Cancel</button>
+                <button onclick="sendReply()"
+                    style="padding: 10px 20px; background: #2C3E50; color: #F4D03F; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Send
+                    Reply 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadTickets);
+
+        // Toggle dropdown on profile button click
+        const profileBtn = document.getElementById('profile-btn');
+        if (profileBtn) {
+            profileBtn.addEventListener('click', () => {
+                const dropdown = document.getElementById('dropdown-menu');
+                dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            });
+
+            document.addEventListener('click', (e) => {
+                const profileDiv = document.getElementById('user-profile');
+                if (profileDiv && !profileDiv.contains(e.target)) {
+                    document.getElementById('dropdown-menu').style.display = 'none';
+                }
+            });
+        }
+
+        let currentTicketId = null;
+        let ticketsData = [];
+        let ticketChart = null;
+
+        async function loadTickets() {
+            try {
+                const response = await fetch('/get_tickets');
+                const data = await response.json();
+                ticketsData = data.tickets || [];
+
+                document.getElementById('loading-tickets').style.display = 'none';
+                document.getElementById('tickets-list').style.display = 'block';
+
+                updateChart();
+                // Default to pending view
+                showTab('pending');
+
+            } catch (error) {
+                console.error('Error loading tickets:', error);
+                document.getElementById('loading-tickets').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        function updateChart() {
+            const pendingCount = ticketsData.filter(t => t.status === 'pending').length;
+            const resolvedCount = ticketsData.filter(t => t.status === 'resolved').length;
+
+            const ctx = document.getElementById('ticketChart').getContext('2d');
+
+            if (ticketChart) {
+                ticketChart.destroy();
+            }
+
+            ticketChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pending', 'Resolved'],
+                    datasets: [{
+                        data: [pendingCount, resolvedCount],
+                        backgroundColor: ['#f39c12', '#27ae60'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderTickets(tickets, status) {
+            const container = document.getElementById('tickets-list');
+
+            if (tickets.length === 0) {
+                container.innerHTML = `<div style="text-align: center; padding: 40px; color: #888;">
+<div style="font-size: 3rem; margin-bottom: 10px;">📭</div>
+<p>No ${status} tickets found.</p>
+</div>`;
+                return;
+            }
+
+            let html = '<div style="display: flex; flex-direction: column; gap: 15px;">';
+
+            tickets.reverse().forEach(ticket => {
+                html += `
+<div class="ticket-card" style="background: #f8f9fa; border-radius: 12px; padding: 20px; border: 1px solid #eee; transition: transform 0.2s;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+    <div>
+        <span style="background: ${status === 'pending' ? '#f39c12' : '#27ae60'}; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">${status}</span>
+        <span style="color: #888; font-size: 0.85rem; margin-left: 10px;">#${ticket.id} • ${ticket.timestamp}</span>
+    </div>
+    <div style="font-weight: 600; color: #2C3E50;">${ticket.name}</div>
+</div>
+
+<h5 style="margin: 0 0 10px 0; color: #2C3E50; font-weight: 700;">${ticket.subject}</h5>
+<p style="color: #555; font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; background: white; padding: 10px; border-radius: 8px; border: 1px solid #eee;">${ticket.message}</p>
+
+${ticket.reply ? `
+    <div style="background: #e8f5e9; padding: 10px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #27ae60;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: #27ae60; margin-bottom: 5px;">ADMIN REPLY (${ticket.replied_at}):</div>
+        <div style="color: #333; font-size: 0.9rem;">${ticket.reply}</div>
+    </div>
+` : ''}
+
+<div style="display: flex; justify-content: flex-end; gap: 10px;">
+    <a href="mailto:${ticket.email}" style="padding: 8px 15px; background: white; border: 1px solid #ddd; color: #555; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: 600;">External Email</a>
+    
+    ${status === 'pending' ? `
+        <button onclick="openReplyModal('${ticket.id}', '${ticket.email}', '${ticket.subject}')" 
+            style="padding: 8px 15px; background: #2C3E50; color: #F4D03F; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem;">
+            💬 Reply & Resolve
+        </button>
+    ` : `
+        <button onclick="updateTicketStatus('${ticket.id}', 'pending')" 
+            style="padding: 8px 15px; background: #f39c12; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem;">
+            ↺ Reopen
+        </button>
+    `}
+</div>
+</div>`;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function showTab(tabName) {
+            const pendingTab = document.getElementById('pending-tab');
+            const resolvedTab = document.getElementById('resolved-tab');
+
+            // Update Tab Styles
+            if (tabName === 'pending') {
+                pendingTab.style.background = '#2C3E50';
+                pendingTab.style.color = 'white';
+                resolvedTab.style.background = 'transparent';
+                resolvedTab.style.color = '#666';
+
+                const pendingTickets = ticketsData.filter(t => t.status === 'pending');
+                renderTickets(pendingTickets, 'pending');
+            } else {
+                resolvedTab.style.background = '#2C3E50';
+                resolvedTab.style.color = 'white';
+                pendingTab.style.background = 'transparent';
+                pendingTab.style.color = '#666';
+
+                const resolvedTickets = ticketsData.filter(t => t.status === 'resolved');
+                renderTickets(resolvedTickets, 'resolved');
+            }
+        }
+
+        // Modal Functions
+        function openReplyModal(id, email, subject) {
+            currentTicketId = id;
+            document.getElementById('reply-email').value = email;
+            document.getElementById('reply-subject').value = 'Re: ' + subject;
+            document.getElementById('reply-message').value = '';
+
+            const modal = document.getElementById('replyModal');
+            modal.style.display = 'flex';
+        }
+
+        function closeReplyModal() {
+            document.getElementById('replyModal').style.display = 'none';
+            currentTicketId = null;
+        }
+
+        async function sendReply() {
+            const message = document.getElementById('reply-message').value;
+            if (!message) {
+                alert('Please enter a message');
+                return;
+            }
+
+            try {
+                const response = await fetch('/reply_ticket', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ticket_id: currentTicketId,
+                        reply_message: message
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    closeReplyModal();
+                    loadTickets(); // Reload to show updated status
+                    // alert('Reply sent successfully!');
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                alert('Error sending reply: ' + error.message);
+            }
+        }
+
+        async function updateTicketStatus(ticketId, newStatus) {
+            if (!confirm(`Are you sure you want to mark this ticket as ${newStatus}?`)) {
+                return;
+            }
+            try {
+                const response = await fetch('/update_ticket_status', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ticket_id: ticketId, status: newStatus })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    loadTickets();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+    </script>
+</body>
+
+</html>

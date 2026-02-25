@@ -1,0 +1,1141 @@
+{
+    "cities": {
+        "Mumbai": {
+            "state": "Maharashtra",
+            "tier": 1,
+            "base_price_per_sqft": 18000,
+            "price_range": [
+                12000,
+                35000
+            ]
+        },
+        "Delhi NCR": {
+            "state": "Delhi",
+            "tier": 1,
+            "base_price_per_sqft": 9000,
+            "price_range": [
+                7500,
+                15000
+            ]
+        },
+        "Bangalore": {
+            "state": "Karnataka",
+            "tier": 1,
+            "base_price_per_sqft": 10000,
+            "price_range": [
+                8000,
+                14000
+            ]
+        },
+        "Hyderabad": {
+            "state": "Telangana",
+            "tier": 1,
+            "base_price_per_sqft": 7300,
+            "price_range": [
+                5700,
+                9500
+            ]
+        },
+        "Chennai": {
+            "state": "Tamil Nadu",
+            "tier": 1,
+            "base_price_per_sqft": 8000,
+            "price_range": [
+                6500,
+                11000
+            ]
+        },
+        "Pune": {
+            "state": "Maharashtra",
+            "tier": 1,
+            "base_price_per_sqft": 7500,
+            "price_range": [
+                6000,
+                10000
+            ]
+        },
+        "Kolkata": {
+            "state": "West Bengal",
+            "tier": 1,
+            "base_price_per_sqft": 7200,
+            "price_range": [
+                5500,
+                9500
+            ]
+        },
+        "Ahmedabad": {
+            "state": "Gujarat",
+            "tier": 1,
+            "base_price_per_sqft": 6000,
+            "price_range": [
+                4500,
+                8000
+            ]
+        },
+        "Visakhapatnam": {
+            "state": "Andhra Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 5500,
+            "price_range": [
+                4000,
+                7500
+            ]
+        },
+        "Vijayawada": {
+            "state": "Andhra Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4800,
+            "price_range": [
+                3500,
+                6500
+            ]
+        },
+        "Guwahati": {
+            "state": "Assam",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3200,
+                6000
+            ]
+        },
+        "Patna": {
+            "state": "Bihar",
+            "tier": 2,
+            "base_price_per_sqft": 4200,
+            "price_range": [
+                3000,
+                5800
+            ]
+        },
+        "Chandigarh": {
+            "state": "Chandigarh",
+            "tier": 2,
+            "base_price_per_sqft": 7000,
+            "price_range": [
+                5500,
+                9500
+            ]
+        },
+        "Raipur": {
+            "state": "Chhattisgarh",
+            "tier": 2,
+            "base_price_per_sqft": 3800,
+            "price_range": [
+                2800,
+                5200
+            ]
+        },
+        "Panaji": {
+            "state": "Goa",
+            "tier": 2,
+            "base_price_per_sqft": 8500,
+            "price_range": [
+                6500,
+                12000
+            ]
+        },
+        "Surat": {
+            "state": "Gujarat",
+            "tier": 2,
+            "base_price_per_sqft": 5200,
+            "price_range": [
+                3800,
+                7000
+            ]
+        },
+        "Vadodara": {
+            "state": "Gujarat",
+            "tier": 2,
+            "base_price_per_sqft": 4800,
+            "price_range": [
+                3500,
+                6500
+            ]
+        },
+        "Rajkot": {
+            "state": "Gujarat",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3200,
+                6000
+            ]
+        },
+        "Gandhinagar": {
+            "state": "Gujarat",
+            "tier": 2,
+            "base_price_per_sqft": 5000,
+            "price_range": [
+                3800,
+                6800
+            ]
+        },
+        "Gurugram": {
+            "state": "Haryana",
+            "tier": 2,
+            "base_price_per_sqft": 8500,
+            "price_range": [
+                6500,
+                12000
+            ]
+        },
+        "Faridabad": {
+            "state": "Haryana",
+            "tier": 2,
+            "base_price_per_sqft": 6500,
+            "price_range": [
+                5000,
+                8500
+            ]
+        },
+        "Shimla": {
+            "state": "Himachal Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 5500,
+            "price_range": [
+                4000,
+                7500
+            ]
+        },
+        "Srinagar": {
+            "state": "Jammu & Kashmir",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                3000,
+                5500
+            ]
+        },
+        "Jammu": {
+            "state": "Jammu & Kashmir",
+            "tier": 2,
+            "base_price_per_sqft": 4200,
+            "price_range": [
+                3200,
+                5800
+            ]
+        },
+        "Ranchi": {
+            "state": "Jharkhand",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3200,
+                6000
+            ]
+        },
+        "Jamshedpur": {
+            "state": "Jharkhand",
+            "tier": 2,
+            "base_price_per_sqft": 4300,
+            "price_range": [
+                3000,
+                5800
+            ]
+        },
+        "Mysuru": {
+            "state": "Karnataka",
+            "tier": 2,
+            "base_price_per_sqft": 5500,
+            "price_range": [
+                4200,
+                7500
+            ]
+        },
+        "Mangalore": {
+            "state": "Karnataka",
+            "tier": 2,
+            "base_price_per_sqft": 5200,
+            "price_range": [
+                4000,
+                7000
+            ]
+        },
+        "Hubli": {
+            "state": "Karnataka",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3500,
+                6000
+            ]
+        },
+        "Kochi": {
+            "state": "Kerala",
+            "tier": 2,
+            "base_price_per_sqft": 6500,
+            "price_range": [
+                5000,
+                9000
+            ]
+        },
+        "Thiruvananthapuram": {
+            "state": "Kerala",
+            "tier": 2,
+            "base_price_per_sqft": 5800,
+            "price_range": [
+                4500,
+                8000
+            ]
+        },
+        "Kozhikode": {
+            "state": "Kerala",
+            "tier": 2,
+            "base_price_per_sqft": 5200,
+            "price_range": [
+                4000,
+                7000
+            ]
+        },
+        "Indore": {
+            "state": "Madhya Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 5000,
+            "price_range": [
+                3800,
+                6800
+            ]
+        },
+        "Bhopal": {
+            "state": "Madhya Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3500,
+                6200
+            ]
+        },
+        "Jabalpur": {
+            "state": "Madhya Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                3000,
+                5500
+            ]
+        },
+        "Nagpur": {
+            "state": "Maharashtra",
+            "tier": 2,
+            "base_price_per_sqft": 5500,
+            "price_range": [
+                4200,
+                7500
+            ]
+        },
+        "Nashik": {
+            "state": "Maharashtra",
+            "tier": 2,
+            "base_price_per_sqft": 5000,
+            "price_range": [
+                3800,
+                6800
+            ]
+        },
+        "Aurangabad": {
+            "state": "Maharashtra",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3500,
+                6200
+            ]
+        },
+        "Thane": {
+            "state": "Maharashtra",
+            "tier": 2,
+            "base_price_per_sqft": 12000,
+            "price_range": [
+                9000,
+                16000
+            ]
+        },
+        "Bhubaneswar": {
+            "state": "Odisha",
+            "tier": 2,
+            "base_price_per_sqft": 4800,
+            "price_range": [
+                3500,
+                6500
+            ]
+        },
+        "Cuttack": {
+            "state": "Odisha",
+            "tier": 2,
+            "base_price_per_sqft": 4200,
+            "price_range": [
+                3000,
+                5800
+            ]
+        },
+        "Ludhiana": {
+            "state": "Punjab",
+            "tier": 2,
+            "base_price_per_sqft": 5500,
+            "price_range": [
+                4200,
+                7500
+            ]
+        },
+        "Amritsar": {
+            "state": "Punjab",
+            "tier": 2,
+            "base_price_per_sqft": 5200,
+            "price_range": [
+                4000,
+                7000
+            ]
+        },
+        "Jalandhar": {
+            "state": "Punjab",
+            "tier": 2,
+            "base_price_per_sqft": 5000,
+            "price_range": [
+                3800,
+                6800
+            ]
+        },
+        "Jaipur": {
+            "state": "Rajasthan",
+            "tier": 2,
+            "base_price_per_sqft": 5500,
+            "price_range": [
+                4200,
+                7500
+            ]
+        },
+        "Jodhpur": {
+            "state": "Rajasthan",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3500,
+                6200
+            ]
+        },
+        "Udaipur": {
+            "state": "Rajasthan",
+            "tier": 2,
+            "base_price_per_sqft": 5000,
+            "price_range": [
+                3800,
+                6800
+            ]
+        },
+        "Kota": {
+            "state": "Rajasthan",
+            "tier": 2,
+            "base_price_per_sqft": 4200,
+            "price_range": [
+                3200,
+                5800
+            ]
+        },
+        "Coimbatore": {
+            "state": "Tamil Nadu",
+            "tier": 2,
+            "base_price_per_sqft": 5800,
+            "price_range": [
+                4500,
+                8000
+            ]
+        },
+        "Madurai": {
+            "state": "Tamil Nadu",
+            "tier": 2,
+            "base_price_per_sqft": 5000,
+            "price_range": [
+                3800,
+                6800
+            ]
+        },
+        "Tiruchirappalli": {
+            "state": "Tamil Nadu",
+            "tier": 2,
+            "base_price_per_sqft": 4800,
+            "price_range": [
+                3500,
+                6500
+            ]
+        },
+        "Warangal": {
+            "state": "Telangana",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3200,
+                6000
+            ]
+        },
+        "Lucknow": {
+            "state": "Uttar Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 5200,
+            "price_range": [
+                4000,
+                7000
+            ]
+        },
+        "Kanpur": {
+            "state": "Uttar Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3500,
+                6200
+            ]
+        },
+        "Agra": {
+            "state": "Uttar Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4200,
+            "price_range": [
+                3200,
+                5800
+            ]
+        },
+        "Varanasi": {
+            "state": "Uttar Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4800,
+            "price_range": [
+                3500,
+                6500
+            ]
+        },
+        "Noida": {
+            "state": "Uttar Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 7500,
+            "price_range": [
+                5500,
+                10000
+            ]
+        },
+        "Ghaziabad": {
+            "state": "Uttar Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 6500,
+            "price_range": [
+                5000,
+                8500
+            ]
+        },
+        "Meerut": {
+            "state": "Uttar Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3500,
+                6200
+            ]
+        },
+        "Dehradun": {
+            "state": "Uttarakhand",
+            "tier": 2,
+            "base_price_per_sqft": 5500,
+            "price_range": [
+                4200,
+                7500
+            ]
+        },
+        "Siliguri": {
+            "state": "West Bengal",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3500,
+                6200
+            ]
+        },
+        "Durgapur": {
+            "state": "West Bengal",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                3000,
+                5500
+            ]
+        },
+        "New Delhi": {
+            "state": "Delhi",
+            "tier": 1,
+            "base_price_per_sqft": 10000,
+            "price_range": [
+                8000,
+                16000
+            ]
+        },
+        "Dwarka": {
+            "state": "Delhi",
+            "tier": 2,
+            "base_price_per_sqft": 8500,
+            "price_range": [
+                7000,
+                12000
+            ]
+        },
+        "Rohini": {
+            "state": "Delhi",
+            "tier": 2,
+            "base_price_per_sqft": 7500,
+            "price_range": [
+                6000,
+                10000
+            ]
+        },
+        "Janakpuri": {
+            "state": "Delhi",
+            "tier": 2,
+            "base_price_per_sqft": 9000,
+            "price_range": [
+                7500,
+                13000
+            ]
+        },
+        "Pitampura": {
+            "state": "Delhi",
+            "tier": 2,
+            "base_price_per_sqft": 9500,
+            "price_range": [
+                8000,
+                14000
+            ]
+        },
+        "Belgaum": {
+            "state": "Karnataka",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                3000,
+                5500
+            ]
+        },
+        "Nizamabad": {
+            "state": "Telangana",
+            "tier": 2,
+            "base_price_per_sqft": 3500,
+            "price_range": [
+                2500,
+                4800
+            ]
+        },
+        "Karimnagar": {
+            "state": "Telangana",
+            "tier": 2,
+            "base_price_per_sqft": 3800,
+            "price_range": [
+                2800,
+                5200
+            ]
+        },
+        "Khammam": {
+            "state": "Telangana",
+            "tier": 2,
+            "base_price_per_sqft": 3600,
+            "price_range": [
+                2600,
+                5000
+            ]
+        },
+        "Salem": {
+            "state": "Tamil Nadu",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3200,
+                6000
+            ]
+        },
+        "Asansol": {
+            "state": "West Bengal",
+            "tier": 2,
+            "base_price_per_sqft": 3800,
+            "price_range": [
+                2800,
+                5200
+            ]
+        },
+        "Howrah": {
+            "state": "West Bengal",
+            "tier": 2,
+            "base_price_per_sqft": 5500,
+            "price_range": [
+                4000,
+                8000
+            ]
+        },
+        "Guntur": {
+            "state": "Andhra Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3200,
+                6000
+            ]
+        },
+        "Nellore": {
+            "state": "Andhra Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                3000,
+                5500
+            ]
+        },
+        "Kurnool": {
+            "state": "Andhra Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 3800,
+            "price_range": [
+                2800,
+                5200
+            ]
+        },
+        "Dibrugarh": {
+            "state": "Assam",
+            "tier": 2,
+            "base_price_per_sqft": 3500,
+            "price_range": [
+                2500,
+                4800
+            ]
+        },
+        "Silchar": {
+            "state": "Assam",
+            "tier": 2,
+            "base_price_per_sqft": 3200,
+            "price_range": [
+                2200,
+                4500
+            ]
+        },
+        "Jorhat": {
+            "state": "Assam",
+            "tier": 2,
+            "base_price_per_sqft": 3400,
+            "price_range": [
+                2400,
+                4700
+            ]
+        },
+        "Nagaon": {
+            "state": "Assam",
+            "tier": 2,
+            "base_price_per_sqft": 3000,
+            "price_range": [
+                2000,
+                4200
+            ]
+        },
+        "Gaya": {
+            "state": "Bihar",
+            "tier": 2,
+            "base_price_per_sqft": 3800,
+            "price_range": [
+                2800,
+                5200
+            ]
+        },
+        "Bhagalpur": {
+            "state": "Bihar",
+            "tier": 2,
+            "base_price_per_sqft": 3500,
+            "price_range": [
+                2500,
+                4800
+            ]
+        },
+        "Muzaffarpur": {
+            "state": "Bihar",
+            "tier": 2,
+            "base_price_per_sqft": 3600,
+            "price_range": [
+                2600,
+                5000
+            ]
+        },
+        "Purnia": {
+            "state": "Bihar",
+            "tier": 2,
+            "base_price_per_sqft": 3200,
+            "price_range": [
+                2200,
+                4500
+            ]
+        },
+        "Bhilai": {
+            "state": "Chhattisgarh",
+            "tier": 2,
+            "base_price_per_sqft": 3500,
+            "price_range": [
+                2500,
+                4800
+            ]
+        },
+        "Bilaspur": {
+            "state": "Chhattisgarh",
+            "tier": 2,
+            "base_price_per_sqft": 3400,
+            "price_range": [
+                2400,
+                4700
+            ]
+        },
+        "Korba": {
+            "state": "Chhattisgarh",
+            "tier": 2,
+            "base_price_per_sqft": 3200,
+            "price_range": [
+                2200,
+                4500
+            ]
+        },
+        "Rajnandgaon": {
+            "state": "Chhattisgarh",
+            "tier": 2,
+            "base_price_per_sqft": 3000,
+            "price_range": [
+                2000,
+                4200
+            ]
+        },
+        "Margao": {
+            "state": "Goa",
+            "tier": 2,
+            "base_price_per_sqft": 7500,
+            "price_range": [
+                5500,
+                10000
+            ]
+        },
+        "Vasco da Gama": {
+            "state": "Goa",
+            "tier": 2,
+            "base_price_per_sqft": 7000,
+            "price_range": [
+                5000,
+                9500
+            ]
+        },
+        "Mapusa": {
+            "state": "Goa",
+            "tier": 2,
+            "base_price_per_sqft": 6500,
+            "price_range": [
+                4500,
+                9000
+            ]
+        },
+        "Ponda": {
+            "state": "Goa",
+            "tier": 2,
+            "base_price_per_sqft": 6000,
+            "price_range": [
+                4000,
+                8500
+            ]
+        },
+        "Panipat": {
+            "state": "Haryana",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3200,
+                6000
+            ]
+        },
+        "Ambala": {
+            "state": "Haryana",
+            "tier": 2,
+            "base_price_per_sqft": 4200,
+            "price_range": [
+                3000,
+                5800
+            ]
+        },
+        "Karnal": {
+            "state": "Haryana",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                2800,
+                5500
+            ]
+        },
+        "Dharamshala": {
+            "state": "Himachal Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 5000,
+            "price_range": [
+                3800,
+                7000
+            ]
+        },
+        "Solan": {
+            "state": "Himachal Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3200,
+                6200
+            ]
+        },
+        "Mandi": {
+            "state": "Himachal Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                2800,
+                5500
+            ]
+        },
+        "Kullu": {
+            "state": "Himachal Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4200,
+            "price_range": [
+                3000,
+                5800
+            ]
+        },
+        "Anantnag": {
+            "state": "Jammu & Kashmir",
+            "tier": 2,
+            "base_price_per_sqft": 3500,
+            "price_range": [
+                2500,
+                4800
+            ]
+        },
+        "Baramulla": {
+            "state": "Jammu & Kashmir",
+            "tier": 2,
+            "base_price_per_sqft": 3200,
+            "price_range": [
+                2200,
+                4500
+            ]
+        },
+        "Kathua": {
+            "state": "Jammu & Kashmir",
+            "tier": 2,
+            "base_price_per_sqft": 3000,
+            "price_range": [
+                2000,
+                4200
+            ]
+        },
+        "Dhanbad": {
+            "state": "Jharkhand",
+            "tier": 2,
+            "base_price_per_sqft": 3800,
+            "price_range": [
+                2800,
+                5200
+            ]
+        },
+        "Bokaro": {
+            "state": "Jharkhand",
+            "tier": 2,
+            "base_price_per_sqft": 3600,
+            "price_range": [
+                2600,
+                5000
+            ]
+        },
+        "Deoghar": {
+            "state": "Jharkhand",
+            "tier": 2,
+            "base_price_per_sqft": 3400,
+            "price_range": [
+                2400,
+                4700
+            ]
+        },
+        "Thrissur": {
+            "state": "Kerala",
+            "tier": 2,
+            "base_price_per_sqft": 5000,
+            "price_range": [
+                3800,
+                7000
+            ]
+        },
+        "Kollam": {
+            "state": "Kerala",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3200,
+                6200
+            ]
+        },
+        "Gwalior": {
+            "state": "Madhya Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4200,
+            "price_range": [
+                3000,
+                5800
+            ]
+        },
+        "Ujjain": {
+            "state": "Madhya Pradesh",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                2800,
+                5500
+            ]
+        },
+        "Rourkela": {
+            "state": "Odisha",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                2800,
+                5500
+            ]
+        },
+        "Berhampur": {
+            "state": "Odisha",
+            "tier": 2,
+            "base_price_per_sqft": 3500,
+            "price_range": [
+                2500,
+                4800
+            ]
+        },
+        "Sambalpur": {
+            "state": "Odisha",
+            "tier": 2,
+            "base_price_per_sqft": 3200,
+            "price_range": [
+                2200,
+                4500
+            ]
+        },
+        "Patiala": {
+            "state": "Punjab",
+            "tier": 2,
+            "base_price_per_sqft": 4500,
+            "price_range": [
+                3200,
+                6000
+            ]
+        },
+        "Bathinda": {
+            "state": "Punjab",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                2800,
+                5500
+            ]
+        },
+        "Ajmer": {
+            "state": "Rajasthan",
+            "tier": 2,
+            "base_price_per_sqft": 4200,
+            "price_range": [
+                3000,
+                5800
+            ]
+        },
+        "Haridwar": {
+            "state": "Uttarakhand",
+            "tier": 2,
+            "base_price_per_sqft": 4800,
+            "price_range": [
+                3500,
+                6500
+            ]
+        },
+        "Roorkee": {
+            "state": "Uttarakhand",
+            "tier": 2,
+            "base_price_per_sqft": 4200,
+            "price_range": [
+                3000,
+                5800
+            ]
+        },
+        "Haldwani": {
+            "state": "Uttarakhand",
+            "tier": 2,
+            "base_price_per_sqft": 4000,
+            "price_range": [
+                2800,
+                5500
+            ]
+        },
+        "Rudrapur": {
+            "state": "Uttarakhand",
+            "tier": 2,
+            "base_price_per_sqft": 3800,
+            "price_range": [
+                2600,
+                5200
+            ]
+        }
+    },
+    "property_type_multipliers": {
+        "Apartment": 1.0,
+        "Builder Floor": 1.2,
+        "Villa": 1.5,
+        "Independent House": 1.3
+    },
+    "bhk_multipliers": {
+        "1 BHK": 0.7,
+        "2 BHK": 1.0,
+        "3 BHK": 1.4,
+        "4+ BHK": 2.0
+    },
+    "locality_adjustments": {
+        "Premium": 1.6,
+        "Mid-Range": 1.0,
+        "Budget": 0.65
+    },
+    "furnishing_premiums": {
+        "Fully Furnished": 1.15,
+        "Semi-Furnished": 1.05,
+        "Unfurnished": 1.0
+    },
+    "age_depreciation": {
+        "New (0-1 year)": 1.0,
+        "1-5 years": 0.95,
+        "5-10 years": 0.88,
+        "10+ years": 0.78
+    },
+    "amenities_premium": {
+        "parking": 0.03,
+        "gym": 0.04,
+        "pool": 0.06,
+        "security": 0.02,
+        "lift": 0.02,
+        "power_backup": 0.02,
+        "club_house": 0.03,
+        "garden": 0.02
+    },
+    "rental_config": {
+        "base_annual_yield": 0.03,
+        "type_multipliers": {
+            "Apartment": 1.0,
+            "Builder Floor": 0.9,
+            "Villa": 0.7,
+            "Independent House": 0.85
+        },
+        "locality_multipliers": {
+            "Premium": 1.2,
+            "Mid-Range": 1.0,
+            "Budget": 0.8
+        },
+        "furnishing_multipliers": {
+            "Fully Furnished": 1.25,
+            "Semi-Furnished": 1.1,
+            "Unfurnished": 1.0
+        }
+    }
+}

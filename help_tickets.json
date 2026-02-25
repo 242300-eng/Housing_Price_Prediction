@@ -1,0 +1,28 @@
+{
+  "tickets": [
+    {
+      "id": "1",
+      "name": "Tufail Ahmad",
+      "email": "meertuffins@gmail.com",
+      "subject": "help me",
+      "message": "FTFTFFFGF",
+      "timestamp": "2026-02-17 00:06:00",
+      "status": "resolved",
+      "reply": "okk",
+      "replied_at": "2026-02-17 22:48:18",
+      "resolved_at": "2026-02-17 22:48:18"
+    },
+    {
+      "id": "2",
+      "name": "Tufail Ahmad",
+      "email": "meertuffins@gmail.com",
+      "subject": "help me",
+      "message": "ygygyhhbhbb",
+      "timestamp": "2026-02-23 22:05:28",
+      "status": "resolved",
+      "reply": "bhbhbhhbhbhhvrxdxfvbjnivcdxxdgv",
+      "replied_at": "2026-02-23 22:06:03",
+      "resolved_at": "2026-02-23 22:06:03"
+    }
+  ]
+}

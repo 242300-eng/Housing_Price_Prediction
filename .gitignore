@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Environment Variables (NEVER commit this!)
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Jupyter Notebooks (large & unnecessary for deployment)
+*.ipynb
+.ipynb_checkpoints/
+
+# Large Data Files
+*.csv
+*.pkl
+*.joblib
+
+# Logs
+*.log
+
+# Temp / Helper files
+patch_render.py
+fix_app.py
+inspect_model.py
+describe_search.txt
+scaler_search.txt
+feature_context.txt
+Untitled-1.txt
+verify_mongo.py
+
+# Node
+node_modules/
+
+# OS Files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,825 @@
+<!-- @Author--Tufail Ahmad Mir -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indian Housing Price Prediction - 60+ Cities</title>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='enhancements.css')}}">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+
+  <!-- CSS for Splash Screen -->
+  <style>
+    #splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease-out, visibility 1s;
+    }
+
+    #splash-logo-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #splash-logo {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      z-index: 2;
+      animation: pulse 2.5s infinite ease-in-out, float 4s infinite ease-in-out;
+      filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.4));
+    }
+
+    .glass-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      backdrop-filter: blur(5px);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+      animation: rotate 15s infinite linear;
+    }
+
+    .splash-text {
+      margin-top: 30px;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.5s;
+      text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+    }
+
+    .loading-bar-container {
+      width: 200px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .loading-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      animation: load 2s forwards ease-in-out;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+
+      50% {
+        transform: scale(1.08);
+        opacity: 1;
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes load {
+      0% {
+        width: 0%;
+      }
+
+      100% {
+        width: 100%;
+      }
+    }
+
+    body.loaded #splash-screen {
+      opacity: 0;
+      visibility: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <div id="splash-logo-container">
+      <div class="glass-ring"></div>
+      <img id="splash-logo" src="{{ url_for('static', filename='property_images/home_logo_3d.png') }}"
+        alt="Housing Logo">
+    </div>
+    <div class="splash-text">Housing Predictor</div>
+    <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+    </div>
+  </div>
+  <header id="head1">
+    <div id="titlepage">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <div class="brand">
+          <h2 style="margin: 0; color: white; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.8rem;">🏠</span> Housing Price Prediction
+          </h2>
+        </div>
+        <nav style="display: flex; gap: 30px; align-items: center;">
+          <a href="/"
+            style="color: white; text-decoration: none; font-weight: 600; text-decoration: underline;">Home</a>
+
+          <a href="/rent" style="color: white; text-decoration: none; font-weight: 600;">Rent</a>
+          <a href="/compare" style="color: white; text-decoration: none; font-weight: 600;">⚖️ Compare</a>
+          <a href="/insights" style="color: white; text-decoration: none; font-weight: 600;">📈 Insights</a>
+          <a href="/contact" style="color: white; text-decoration: none; font-weight: 600;">Contact</a>
+
+          {% if user and user.is_admin %}
+          <a href="/admin" id="admin-link" style="color: #e74c3c; text-decoration: none; font-weight: 600;">🔐 Admin
+            Panel</a>
+          {% endif %}
+
+          {% if user and not user.is_admin %}
+          <a href="/dashboard" style="color: #3498db; text-decoration: none; font-weight: 600;">📊 My Dashboard</a>
+          {% endif %}
+
+          {% if user %}
+          <!-- User Profile Dropdown -->
+          <div id="user-profile" style="position: relative;">
+            <button id="profile-btn"
+              style="background: rgba(255,255,255,0.15); color: #F4D03F; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px);">
+              <span id="user-avatar">👤</span>
+              <span id="user-name-display">{{ user.name }}</span>
+            </button>
+            <div id="dropdown-menu"
+              style="display: none; position: absolute; top: 45px; right: 0; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 180px; z-index: 1000;">
+              <div style="padding: 15px; border-bottom: 1px solid #eee;">
+                <div style="font-weight: 600; color: #2C3E50;" id="dropdown-username">{{ user.name }}</div>
+                <div style="font-size: 0.85rem; color: #888;" id="dropdown-email">{{ user.email }}</div>
+              </div>
+              <a href="/logout" id="dropdown-signout"
+                style="display: block; width: 100%; padding: 12px 15px; border: none; background: none; color: #e74c3c; font-weight: 600; cursor: pointer; text-align: left; border-radius: 0 0 10px 10px; text-decoration: none;">
+                🚪 Sign Out
+              </a>
+            </div>
+          </div>
+          {% else %}
+          <div id="auth-buttons">
+            <a href="/login"
+              style="background: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 10px 30px; border-radius: 25px; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.2); backdrop-filter: blur(10px); border: 2px solid white;">
+              🔐 Sign In
+            </a>
+          </div>
+          {% endif %}
+          <a href="/about" style="color: white; text-decoration: none; font-weight: 600;">About</a>
+        </nav>
+        <div class="theme-switch-wrapper" style="margin-left: 20px;">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider"></div>
+          </label>
+          <span style="margin-left: 10px; color: white; font-size: 0.8rem; font-weight: 600;">🌙 Dark Mode</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <h3 id="price" style="text-align: center; margin: 30px 0 20px 0; color: #2C3E50;">🏠 Indian Housing Price Predictor
+  </h3>
+  <div class="container-fluid">
+    <!-- Input form for Indian housing prediction -->
+    <form action="/" method="POST">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <div class="row">
+            <br />
+          </div>
+
+          <!-- Row 1: City, Property Type, BHK, Area -->
+          <div class="row">
+            <div class="col-md-3">
+              <label class="form-label"><strong>Select City *</strong></label>
+              <select name="city" class="form-select" id="city" required onchange="fetchAreas(this.value)">
+                <option value="">-- Select City --</option>
+                {% for state in states %}
+                <optgroup label="📍 {{ state }}">
+                  {% for city in cities_by_state[state] %}
+                  <option value="{{ city }}" {% if inputs and inputs.city==city %}selected{% endif %}>{{ city }}
+                  </option>
+                  {% endfor %}
+                </optgroup>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Dynamic Locality Area Box -->
+            <div class="col-md-3" id="area-box"
+              style="display: {% if inputs and inputs.city %}block{% else %}none{% endif %};">
+              <label class="form-label"><strong>Select Area *</strong></label>
+              <select name="locality_area" class="form-select" id="locality_area" onchange="updateAreaMultiplier(this)">
+                <option value="Main City / Residential">-- Select Area --</option>
+                {% if inputs and inputs.city_areas %}
+                {% for area in inputs.city_areas %}
+                <option value="{{ area.name }}" data-multiplier="{{ area.multiplier }}" {% if
+                  inputs.locality_area==area.name %}selected{% endif %}>{{ area.name }}</option>
+                {% endfor %}
+                {% endif %}
+              </select>
+              <input type="hidden" name="area_multiplier" id="area_multiplier"
+                value="{{ inputs.area_multiplier if inputs else '1.0' }}">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label"><strong>Property Type *</strong></label>
+              <select name="property_type" class="form-select" id="property_type" required>
+                <option value="Apartment" selected>Apartment</option>
+                <option value="Builder Floor">Builder Floor</option>
+                <option value="Villa">Villa</option>
+                <option value="Independent House">Independent House</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label"><strong>BHK Configuration *</strong></label>
+              <select name="bhk" class="form-select" id="bhk" required>
+                <option value="1 BHK">1 BHK</option>
+                <option value="2 BHK" selected>2 BHK</option>
+                <option value="3 BHK">3 BHK</option>
+                <option value="4+ BHK">4+ BHK</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label"><strong>Built-up Area (sq.ft) *</strong> <span
+                  class="live-badge">Live</span></label>
+              <input name="area_sqft" class="form-control" id="area_sqft" type="range" min="100" max="10000" step="50"
+                value="1000" required />
+              <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                <span id="area-val" style="font-weight: 700; color: #667eea;">1000 sq.ft</span>
+                <span id="real-time-val" style="font-weight: 700; color: #ef4444;">₹80.00 Lakh (Est.)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: Locality Tier, Property Age, Furnishing -->
+          <div class="row">
+            <div class="col-md-4">
+              <label class="form-label"><strong>Locality Tier *</strong></label>
+              <select name="locality_tier" class="form-select" id="locality_tier" required>
+                <option value="Premium">Premium Locality</option>
+                <option value="Mid-Range" selected>Mid-Range Locality</option>
+                <option value="Budget">Budget Locality</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label"><strong>Property Age *</strong></label>
+              <select name="age_of_property" class="form-select" id="age_of_property" required>
+                <option value="New (0-1 year)" selected>New (0-1 year)</option>
+                <option value="1-5 years">1-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value="10+ years">10+ years</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label"><strong>Furnishing Status *</strong></label>
+              <select name="furnishing" class="form-select" id="furnishing" required>
+                <option value="Fully Furnished">Fully Furnished</option>
+                <option value="Semi-Furnished">Semi-Furnished</option>
+                <option value="Unfurnished" selected>Unfurnished</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 3: Amenities (Checkboxes) -->
+          <div class="row">
+            <div class="col-md-12">
+              <label class="form-label"><strong>Amenities (select all that apply)</strong></label>
+              <div class="row" style="margin-top: 10px;">
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="parking" id="parking" value="1">
+                    <label class="form-check-label" for="parking">🚗 Parking</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="gym" id="gym" value="1">
+                    <label class="form-check-label" for="gym">💪 Gym</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="pool" id="pool" value="1">
+                    <label class="form-check-label" for="pool">🏊 Swimming Pool</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="security" id="security" value="1">
+                    <label class="form-check-label" for="security">🔒 24x7 Security</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 5px;">
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="lift" id="lift" value="1">
+                    <label class="form-check-label" for="lift">🛗 Lift/Elevator</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="power_backup" id="power_backup" value="1">
+                    <label class="form-check-label" for="power_backup">⚡ Power Backup</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <button id="btn" type="submit" class="btn btn-primary btn-block"
+            style="padding: 12px 40px; font-size: 18px; font-weight: bold;">
+            💰 Get Price Estimate
+          </button>
+
+          <!-- For Result -->
+          <div class="row">
+            <div class="col-md-12">
+              <br>
+              {% if error %}
+              <div class="alert alert-danger" role="alert" style="text-align: center; font-weight: bold;">
+                ⚠️ {{ error }}
+              </div>
+              {% endif %}
+              {% if results %}
+              <div id="prediction-result" class="alert alert-success" role="alert"
+                style="padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                <div class="row align-items-center">
+                  <div class="col-md-5">
+                    <img src="{{ url_for('static', filename='property_images/' + results.image) }}"
+                      alt="{{ inputs.property_type }}"
+                      style="width: 100%; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: transform 0.3s;"
+                      onmouseover="this.style.transform='scale(1.05)'">
+                  </div>
+                  <div class="col-md-7 text-start">
+                    <h3 style="margin-bottom: 10px; font-weight: 600;">📊 Prediction Result</h3>
+                    <h2 style="margin: 0; font-size: 2.5rem; font-weight: 800; color: #FFD700;">{{ results.total }}</h2>
+                    <p style="font-size: 1.1rem; opacity: 0.9; margin-top: 5px;">Price: {{ results.per_sqft }}</p>
+                    <div
+                      style="font-size: 0.9rem; background: rgba(0,0,0,0.2); padding: 5px 15px; border-radius: 20px; display: inline-block; margin-top: 10px;">
+                      📍 {{ inputs.city }} | {{ inputs.bhk }} {{ inputs.property_type }}
+                    </div>
+                    {% if results.market_sentiment %}
+                    <div class="sentiment-badge" style="display: inline-block; margin-left: 10px;">
+                      {{ results.market_sentiment }}
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <!-- Advanced Analytics Section -->
+                <div class="row mt-4">
+                  <!-- Investment Score -->
+                  <div class="col-md-4">
+                    <div
+                      style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; height: 100%; text-align: center;">
+                      <h5
+                        style="font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;">
+                        Investment Score</h5>
+                      <div class="investment-score-badge">
+                        {{ results.investment_score }}
+                      </div>
+                      <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">Higher is better for long-term
+                        growth</p>
+                    </div>
+                  </div>
+
+                  <!-- Neighborhood Ratings -->
+                  <div class="col-md-8">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; height: 100%;">
+                      <h5
+                        style="font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;">
+                        Neighborhood Quality</h5>
+                      <div class="row">
+                        {% for factor, rating in results.neighborhood_ratings.items() %}
+                        <div class="col-6">
+                          <div
+                            style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600;">
+                            <span>{{ factor }}</span>
+                            <span>{{ rating }}/10</span>
+                          </div>
+                          <div class="rating-bar-container">
+                            <div class="rating-bar-fill" style="width: {{ (rating * 10)|int }}%"></div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% if inputs %}
+                <div
+                  style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.15); border-radius: 10px; text-align: left;">
+                  <h4 style="margin-bottom: 15px; font-weight: bold;">📋 Property Details:</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p style="margin: 5px 0;"><strong>📍 Location:</strong> {{ inputs.city }}, {{ inputs.state }}</p>
+                      <p style="margin: 5px 0;"><strong>🏢 Property Type:</strong> {{ inputs.property_type }}</p>
+                      <p style="margin: 5px 0;"><strong>🛏️ Configuration:</strong> {{ inputs.bhk }}</p>
+                      <p style="margin: 5px 0;"><strong>📐 Built-up Area:</strong> {{ inputs.area_sqft }} sq.ft</p>
+                      <p style="margin: 5px 0;"><strong>💵 Price per sq.ft:</strong> {{ inputs.price_per_sqft }}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <p style="margin: 5px 0;"><strong>🌆 Locality:</strong> {{ inputs.locality_tier }}</p>
+                      <p style="margin: 5px 0;"><strong>🕒 Age:</strong> {{ inputs.age_of_property }}</p>
+                      <p style="margin: 5px 0;"><strong>🛋️ Furnishing:</strong> {{ inputs.furnishing }}</p>
+                      <p style="margin: 5px 0;"><strong>✨ Amenities:</strong> {{ inputs.amenities }}</p>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+
+                {% if emi_data %}
+                <div style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.15); border-radius: 10px;">
+                  <h4 style="margin-bottom: 15px; font-weight: bold;">💳 EMI Calculator (Home Loan)</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p style="margin: 5px 0;"><strong>🏦 Loan Amount (80%):</strong> ₹{{
+                        "%.2f"|format(emi_data.loan_amount/100000) }} Lakh</p>
+                      <p style="margin: 5px 0;"><strong>💰 Down Payment (20%):</strong> ₹{{
+                        "%.2f"|format(emi_data.down_payment/100000) }} Lakh</p>
+                      <p style="margin: 5px 0;"><strong>📊 Interest Rate:</strong> {{ emi_data.interest_rate }}% per
+                        annum</p>
+                    </div>
+                    <div class="col-md-6">
+                      <p style="margin: 5px 0;"><strong>📅 Tenure:</strong> {{ emi_data.tenure_years }} years</p>
+                      <p style="margin: 5px 0; font-size: 1.2rem; color: #FFD700;"><strong>💵 Monthly EMI:</strong> ₹{{
+                        "{:,.0f}".format(emi_data.emi_monthly) }}</p>
+                      <p style="margin: 5px 0;"><strong>💸 Total Interest:</strong> ₹{{
+                        "%.2f"|format(emi_data.total_interest/100000) }} Lakh</p>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+
+                <div style="margin-top: 20px; text-align: center;">
+                  <button onclick="downloadPredictionPDF()" class="btn btn-outline-light"
+                    style="border-radius: 20px; font-weight: 600;">
+                    📄 Download Report
+                  </button>
+                </div>
+
+                <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.9;">* Estimated price based on Latest 2026
+                  market
+                  data. Actual prices may vary.</p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- ... existing code ... -->
+
+          <!-- PDF Gen Script -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+          <script>
+            function downloadPredictionPDF() {
+              const element = document.getElementById('prediction-result');
+              if (!element) return;
+
+              // Add a temporary class to ensure capture is perfect
+              element.classList.add('pdf-capture');
+
+              const opt = {
+                margin: 0.2,
+                filename: 'Housing_Report_{{ inputs.city if inputs else "General" }}.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: {
+                  scale: 2,
+                  useCORS: true,
+                  logging: false,
+                  letterRendering: true,
+                  allowTaint: true
+                },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+              };
+
+              html2pdf().set(opt).from(element).save().then(() => {
+                element.classList.remove('pdf-capture');
+              });
+            }
+          </script>
+          <!-- Author Details -->
+          <!-- Independent EMI Calculator Section -->
+          <div id="emi-calculator-section"
+            style="margin-top: 50px; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+            <h3 style="color: #2C3E50; text-align: center; margin-bottom: 30px;">🔢 Mortgage EMI Calculator</h3>
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label">Loan Amount (₹)</label>
+                <input type="number" id="emi_principal" class="form-control" placeholder="e.g. 5000000">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Interest Rate (% p.a)</label>
+                <input type="number" id="emi_rate" class="form-control" placeholder="e.g. 8.5" step="0.1" value="8.5">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Tenure (Years)</label>
+                <input type="number" id="emi_tenure" class="form-control" placeholder="e.g. 20" value="20">
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <button type="button" onclick="calculateCustomEMI()" class="btn btn-primary"
+                style="padding: 10px 30px; border-radius: 25px; font-weight: 600; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
+                Calculate EMI
+              </button>
+            </div>
+            <div id="emi-result-display"
+              style="display: none; margin-top: 30px; background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #667eea;">
+              <h4 style="margin: 0; color: #2C3E50;">Monthly EMI: <span id="emi_monthly_val"
+                  style="color: #667eea; font-weight: 800;"></span></h4>
+              <p style="margin: 10px 0 0 0; color: #666;">Total Interest: <span id="emi_total_interest"></span> | Total
+                Payment: <span id="emi_total_payment"></span></p>
+            </div>
+          </div>
+
+          <!-- Affordability Calculator Section -->
+          <div id="affordability-section"
+            style="margin-top: 50px; padding: 30px; background: linear-gradient(135deg, #2C3E50 0%, #4CA1AF 100%); border-radius: 15px; color: white; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+            <h3 style="text-align: center; margin-bottom: 30px; font-weight: 700;">💰 How Much Can You Afford?</h3>
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label">Monthly Net Income (₹)</label>
+                <input type="number" id="monthly_income" class="form-control"
+                  style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3);"
+                  placeholder="e.g. 100000">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Available Down Payment (₹)</label>
+                <input type="number" id="down_payment_avail" class="form-control"
+                  style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3);"
+                  placeholder="e.g. 1000000">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Existing Monthly Debts/EMI (₹)</label>
+                <input type="number" id="monthly_debts" class="form-control"
+                  style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3);"
+                  value="0">
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <button type="button" onclick="calculateAffordability()" class="btn btn-warning"
+                style="padding: 10px 30px; border-radius: 25px; font-weight: 700; color: #2C3E50;">
+                Check Affordability
+              </button>
+            </div>
+
+            <div id="affordability-result"
+              style="display: none; margin-top: 30px; background: rgba(255,255,255,0.15); padding: 25px; border-radius: 10px;">
+              <div class="row align-items-center">
+                <div class="col-md-7">
+                  <h4 style="margin: 0;">You can afford a property worth up to:</h4>
+                  <div id="max_property_value"
+                    style="font-size: 2.5rem; font-weight: 800; color: #FFD700; margin: 10px 0;">₹0</div>
+                  <p id="affordability-advice" style="font-size: 0.95rem; opacity: 0.9;"></p>
+                </div>
+                <div class="col-md-5" style="border-left: 1px solid rgba(255,255,255,0.2); padding-left: 20px;">
+                  <p style="margin: 5px 0;"><strong>Max Monthly EMI:</strong> <span id="max_emi">₹0</span></p>
+                  <p style="margin: 5px 0;"><strong>Estimated Loan:</strong> <span id="max_loan">₹0</span></p>
+                  <p style="margin: 5px 0; font-size: 0.8rem; opacity: 0.7;">* Calculated based on 40% DTI rule & 8.5%
+                    interest for 20 years.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            function calculateCustomEMI() {
+              const p = parseFloat(document.getElementById('emi_principal').value);
+              const r = parseFloat(document.getElementById('emi_rate').value);
+              const n = parseFloat(document.getElementById('emi_tenure').value);
+
+              if (p && r && n) {
+                const r_monthly = r / (12 * 100);
+                const n_months = n * 12;
+
+                const emi = p * r_monthly * Math.pow(1 + r_monthly, n_months) / (Math.pow(1 + r_monthly, n_months) - 1);
+                const totalPayment = emi * n_months;
+                const totalInterest = totalPayment - p;
+
+                document.getElementById('emi_monthly_val').innerText = '₹' + Math.round(emi).toLocaleString('en-IN');
+                document.getElementById('emi_total_interest').innerText = '₹' + Math.round(totalInterest).toLocaleString('en-IN');
+                document.getElementById('emi_total_payment').innerText = '₹' + Math.round(totalPayment).toLocaleString('en-IN');
+
+                document.getElementById('emi-result-display').style.display = 'block';
+              } else {
+                alert('Please fill all fields');
+              }
+            }
+
+            function calculateAffordability() {
+              const income = parseFloat(document.getElementById('monthly_income').value);
+              const downPayment = parseFloat(document.getElementById('down_payment_avail').value) || 0;
+              const debts = parseFloat(document.getElementById('monthly_debts').value) || 0;
+
+              if (!income) {
+                alert('Please enter your monthly income');
+                return;
+              }
+
+              // Rule of thumb: Max EMI should not exceed 40% of net income minus existing debts
+              const maxEMI = (income * 0.4) - debts;
+
+              if (maxEMI <= 0) {
+                alert('Based on your income and debts, a property purchase might be difficult right now.');
+                return;
+              }
+
+              // Reverse EMI calculation to find loan amount
+              // EMI = P * r * (1+r)^n / ((1+r)^n - 1)
+              // P = EMI * ((1+r)^n - 1) / (r * (1+r)^n)
+              const r = 8.5 / (12 * 100); // 8.5% interest
+              const n = 20 * 12; // 20 years
+
+              const maxLoan = maxEMI * (Math.pow(1 + r, n) - 1) / (r * Math.pow(1 + r, n));
+              const maxProperty = maxLoan + downPayment;
+
+              // Format values
+              const formatCurrency = (val) => '₹' + Math.round(val).toLocaleString('en-IN');
+
+              document.getElementById('max_property_value').innerText = formatCurrency(maxProperty);
+              document.getElementById('max_emi').innerText = formatCurrency(maxEMI);
+              document.getElementById('max_loan').innerText = formatCurrency(maxLoan);
+
+              let advice = "";
+              if (downPayment < (maxProperty * 0.2)) {
+                advice = "⚠️ Tip: Your down payment is less than 20%. Increasing it could help you get better loan terms.";
+              } else {
+                advice = "✅ Great! Your down payment coverage is strong. This will help in getting low interest rates.";
+              }
+              document.getElementById('affordability-advice').innerText = advice;
+              document.getElementById('affordability-result').style.display = 'block';
+            }
+          </script>
+
+        </div> <!-- closes col-md-10 -->
+        <div class="col-md-1"></div>
+      </div> <!-- closes row from line 240 -->
+    </form>
+    <br><br>
+  </div> <!-- closes container-fluid -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <script>
+    // Splash Screen Logic
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        document.body.classList.add('loaded');
+      }, 2000); // 2 seconds minimum display
+    });
+
+    // Toggle dropdown on profile button click
+    const profileBtn = document.getElementById('profile-btn');
+    if (profileBtn) {
+      profileBtn.addEventListener('click', () => {
+        const dropdown = document.getElementById('dropdown-menu');
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        const profileDiv = document.getElementById('user-profile');
+        if (profileDiv && !profileDiv.contains(e.target)) {
+          document.getElementById('dropdown-menu').style.display = 'none';
+        }
+      });
+    }
+
+    // Dark Mode Toggle Logic
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+      document.body.classList.add(currentTheme);
+      if (currentTheme === 'dark-mode') {
+        toggleSwitch.checked = true;
+      }
+    }
+
+    function switchTheme(e) {
+      if (e.target.checked) {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light-mode');
+      }
+    }
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+    // Dynamic Areas Fetch Logic
+    async function fetchAreas(cityName) {
+      const areaBox = document.getElementById('area-box');
+      const areaSelect = document.getElementById('locality_area');
+
+      if (!cityName) {
+        areaBox.style.display = 'none';
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/city_areas/${encodeURIComponent(cityName)}`);
+        const data = await response.json();
+
+        if (data.success) {
+          areaSelect.innerHTML = '<option value="">-- Select Locality Area --</option>';
+          data.areas.forEach(area => {
+            const option = document.createElement('option');
+            option.value = area.name;
+            option.text = area.name;
+            option.setAttribute('data-multiplier', area.multiplier);
+            areaSelect.appendChild(option);
+          });
+          areaBox.style.display = 'block';
+          // Force slide animation effect if wanted
+          areaBox.style.animation = 'fadeInUp 0.5s forwards';
+        } else {
+          areaBox.style.display = 'none';
+        }
+      } catch (error) {
+        console.error('Error fetching areas:', error);
+        areaBox.style.display = 'none';
+      }
+    }
+
+    function updateAreaMultiplier(selectElement) {
+      const selectedOption = selectElement.options[selectElement.selectedIndex];
+      const multiplier = selectedOption.getAttribute('data-multiplier') || "1.0";
+      document.getElementById('area_multiplier').value = multiplier;
+
+      // Trigger real-time estimate update if exists
+      if (typeof updateRealTimeEstimate === 'function') {
+        updateRealTimeEstimate();
+      }
+    }
+
+    // Auto-fetch if city is pre-selected (e.g. on validation error or results)
+    window.addEventListener('DOMContentLoaded', () => {
+      const cityVal = document.getElementById('city').value;
+      if (cityVal && !document.getElementById('locality_area').options.length > 1) {
+        fetchAreas(cityVal);
+      }
+    });
+  </script>
+</body>
+
+</html>

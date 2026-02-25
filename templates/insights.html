@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Insights - Housing Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='enhancements.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .insights-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .chart-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+
+        h2,
+        h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #FFD700;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+    <header id="head1">
+        <div id="titlepage">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+                <div class="brand">
+                    <h2 style="margin: 0; color: white; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.8rem;">🏠</span> Housing Price Prediction
+                    </h2>
+                </div>
+                <nav style="display: flex; gap: 30px; align-items: center;">
+                    <a href="/" style="color: white; text-decoration: none; font-weight: 600;">Home</a>
+                    <a href="/rent" style="color: white; text-decoration: none; font-weight: 600;">Rent</a>
+                    <a href="/insights"
+                        style="color: white; text-decoration: none; font-weight: 600; text-decoration: underline;">Insights</a>
+                    <a href="/about" style="color: white; text-decoration: none; font-weight: 600;">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="insights-container">
+        <div class="text-center mb-5">
+            <h1 style="color: white; font-weight: 800;">📈 Market Analytics Dashboard</h1>
+            <p style="color: rgba(255,255,255,0.7);">Real-time property market trends across Indian cities</p>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-item glass-panel">
+                <div class="stat-value" id="stat-city">Mumbai</div>
+                <div class="stat-label">Selected City</div>
+            </div>
+            <div class="stat-item glass-panel">
+                <div class="stat-value" id="stat-price">₹18,000</div>
+                <div class="stat-label">Avg Price / sq.ft</div>
+            </div>
+            <div class="stat-item glass-panel">
+                <div class="stat-value" id="stat-demand">85%</div>
+                <div class="stat-label">Market Demand</div>
+            </div>
+        </div>
+
+        <div class="chart-card glass-panel text-center">
+            <h3>🏙️ Select City for Detailed Insights</h3>
+            <select id="citySelect" class="form-select mx-auto"
+                style="max-width: 400px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 12px;">
+                {% for state in states %}
+                <optgroup label="📍 {{ state }}">
+                    {% for city in cities_by_state[state] %}
+                    <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
+                </optgroup>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="chart-card glass-panel">
+                    <h3>📈 5-Year Price Trends (Price/sq.ft)</h3>
+                    <div class="chart-container">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="chart-card glass-panel">
+                    <h3>🏘️ Locality Price Comparison</h3>
+                    <div class="chart-container">
+                        <canvas id="localityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="chart-card glass-panel">
+                    <h3>🏆 Top Cities Comparison</h3>
+                    <div class="chart-container">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="chart-card glass-panel">
+                    <h3>🔥 Investment Hotspots (2026)</h3>
+                    <div id="hotspots-container" class="row">
+                        <!-- Hotspots will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let marketChart, localityChart, trendChart;
+
+        async function updateCityInsights(city) {
+            // Update Base Insights
+            const response = await fetch(`/api/city_insights/${city}`);
+            const data = await response.json();
+
+            if (data.error) return;
+
+            document.getElementById('stat-city').innerText = city;
+            document.getElementById('stat-price').innerText = '₹' + (data.base_price || 0).toLocaleString();
+            document.getElementById('stat-demand').innerText = (data.demand_score || 0) + '%';
+
+            // Update Locality Chart
+            const locCtx = document.getElementById('localityChart').getContext('2d');
+            if (localityChart) localityChart.destroy();
+            localityChart = new Chart(locCtx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(data.localities),
+                    datasets: [{
+                        label: 'Avg Price (₹)',
+                        data: Object.values(data.localities),
+                        backgroundColor: ['#ffd700', '#38bdf8', '#818cf8'],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' } },
+                        x: { ticks: { color: 'white' }, grid: { display: false } }
+                    }
+                }
+            });
+
+            // Update Trend Chart
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            if (trendChart) trendChart.destroy();
+            const trendRes = await fetch(`/api/market_trends/${city}`);
+            const trendData = await trendRes.json();
+
+            trendChart = new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: trendData.labels,
+                    datasets: [{
+                        label: 'Price per sq.ft (₹)',
+                        data: trendData.values,
+                        borderColor: '#FFD700',
+                        backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointBackgroundColor: '#FFD700'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: 'white' } } },
+                    scales: {
+                        y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: 'white' } },
+                        x: { grid: { display: false }, ticks: { color: 'white' } }
+                    }
+                }
+            });
+        }
+
+        async function loadHotspots() {
+            const res = await fetch('/api/investment_hotspots');
+            const hotspots = await res.json();
+            const container = document.getElementById('hotspots-container');
+            container.innerHTML = '';
+
+            hotspots.forEach(spot => {
+                const html = `
+                    <div class="col-md-6 mb-3">
+                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <h4 style="margin: 0; color: #FFD700;">${spot.city}</h4>
+                                <span style="background: rgba(244,208,63,0.2); color: #F4D03F; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">${spot.growth} Up</span>
+                            </div>
+                            <p style="margin: 10px 0 5px 0; font-size: 0.85rem; opacity: 0.8;">${spot.reason}</p>
+                            <div style="font-weight: 700; font-size: 0.8rem;">Status: ${spot.status}</div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initial Market Comparison Chart
+            const marketResponse = await fetch('/api/market_data');
+            const marketData = await marketResponse.json();
+
+            const ctx = document.getElementById('marketChart').getContext('2d');
+            marketChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: marketData.labels,
+                    datasets: [{
+                        label: 'Price per sq.ft (₹)',
+                        data: marketData.prices,
+                        backgroundColor: 'rgba(56, 189, 248, 0.4)',
+                        borderColor: '#38bdf8',
+                        borderWidth: 2,
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: 'white' } } },
+                    scales: {
+                        y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: 'white' } },
+                        x: { grid: { display: false }, ticks: { color: 'white' } }
+                    }
+                }
+            });
+
+            // Handle City Selection
+            const citySelect = document.getElementById('citySelect');
+            citySelect.addEventListener('change', (e) => updateCityInsights(e.target.value));
+
+            // Load Global Hotspots
+            loadHotspots();
+
+            // Load Default City
+            updateCityInsights('Mumbai');
+        });
+    </script>
+</body>
+
+</html>

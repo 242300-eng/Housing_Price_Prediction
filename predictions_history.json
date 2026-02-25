@@ -1,0 +1,344 @@
+{
+  "predictions": [
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "TUFAIL",
+      "timestamp": "2026-02-17 00:05:00",
+      "city": "Srinagar",
+      "property_type": "Apartment",
+      "bhk": "3 BHK",
+      "area_sqft": 500,
+      "predicted_price": 2820048.0000000005,
+      "price_display": "\u20b928.20 Lakh"
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-17 00:26:23",
+      "city": "Kolkata",
+      "property_type": "Builder Floor",
+      "bhk": "3 BHK",
+      "area_sqft": 600,
+      "predicted_price": 7239456.0,
+      "price_display": "\u20b972.39 Lakh"
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-17 00:28:14",
+      "city": "Jammu",
+      "property_type": "Independent House",
+      "bhk": "4+ BHK",
+      "area_sqft": 500,
+      "predicted_price": 5297292.0,
+      "price_display": "\u20b952.97 Lakh"
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-17 00:40:15",
+      "city": "Mumbai",
+      "property_type": "Builder Floor",
+      "bhk": "2 BHK",
+      "area_sqft": 500,
+      "predicted_price": 10773000.0,
+      "price_display": "\u20b91.08 Crore"
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-17 22:45:18",
+      "city": "Jammu",
+      "property_type": "Apartment",
+      "bhk": "3 BHK",
+      "area_sqft": 400,
+      "predicted_price": 2416503.6,
+      "price_display": "\u20b924.17 Lakh"
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-17 23:00:56",
+      "city": "Kolkata",
+      "property_type": "Builder Floor",
+      "bhk": "3 BHK",
+      "area_sqft": 600,
+      "predicted_price": 7456639.68,
+      "price_display": "\u20b974.57 Lakh"
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-20 15:25:24",
+      "city": "Mumbai",
+      "property_type": "Apartment",
+      "bhk": "2 BHK",
+      "area_sqft": 500,
+      "predicted_price": 9000000.0,
+      "price_display": {
+        "total": "\u20b990.00 Lakh",
+        "per_sqft": "\u20b918,000/sq.ft",
+        "image": "mumbai_apartment.webp"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-20 19:13:20",
+      "city": "Srinagar",
+      "property_type": "Independent House",
+      "bhk": "4+ BHK",
+      "area_sqft": 1000,
+      "predicted_price": 10892700.0,
+      "price_display": {
+        "total": "\u20b91.09 Crore",
+        "per_sqft": "\u20b910,893/sq.ft",
+        "image": "house_general.png"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-20 22:09:17",
+      "city": "Delhi NCR",
+      "property_type": "Apartment",
+      "bhk": "2 BHK",
+      "area_sqft": 500,
+      "predicted_price": 4500000.0,
+      "price_display": {
+        "total": "\u20b945.00 Lakh",
+        "per_sqft": "\u20b99,000/sq.ft",
+        "image": "delhi_house.png"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-20 22:09:50",
+      "city": "Jammu",
+      "property_type": "Independent House",
+      "bhk": "2 BHK",
+      "area_sqft": 1000,
+      "predicted_price": 5460000.0,
+      "price_display": {
+        "total": "\u20b954.60 Lakh",
+        "per_sqft": "\u20b95,460/sq.ft",
+        "image": "house_general.png"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-20 22:11:51",
+      "city": "Srinagar",
+      "property_type": "Independent House",
+      "bhk": "4+ BHK",
+      "area_sqft": 1000,
+      "predicted_price": 10685220.000000002,
+      "price_display": {
+        "total": "\u20b91.07 Crore",
+        "per_sqft": "\u20b910,685/sq.ft",
+        "image": "house_general.png"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-20 22:12:15",
+      "city": "Patna",
+      "property_type": "Independent House",
+      "bhk": "3 BHK",
+      "area_sqft": 700,
+      "predicted_price": 5337422.999999999,
+      "price_display": {
+        "total": "\u20b953.37 Lakh",
+        "per_sqft": "\u20b97,625/sq.ft",
+        "image": "house_general.png"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-20 22:30:08",
+      "city": "Visakhapatnam",
+      "property_type": "Builder Floor",
+      "bhk": "3 BHK",
+      "area_sqft": 100,
+      "predicted_price": 570570.0,
+      "price_display": {
+        "total": "\u20b95.71 Lakh",
+        "per_sqft": "\u20b95,706/sq.ft",
+        "image": "house_general.png",
+        "investment_score": 6.5,
+        "neighborhood_ratings": {
+          "Safety": 6,
+          "Connectivity": 6,
+          "Lifestyle": 4,
+          "Greenery": 5
+        },
+        "market_sentiment": "\ud83d\udcc8 Growing Value"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-21 12:42:32",
+      "city": "Chennai",
+      "property_type": "Apartment",
+      "bhk": "2 BHK",
+      "area_sqft": 1000,
+      "predicted_price": 8000000.0,
+      "price_display": {
+        "total": "\u20b980.00 Lakh",
+        "per_sqft": "\u20b98,000/sq.ft",
+        "image": "apartment_general.png",
+        "investment_score": 9.0,
+        "neighborhood_ratings": {
+          "Safety": 7,
+          "Connectivity": 9,
+          "Lifestyle": 7,
+          "Greenery": 6
+        },
+        "market_sentiment": "\ud83d\udd25 High Demand"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-23 21:18:34",
+      "city": "Amritsar",
+      "property_type": "Independent House",
+      "bhk": "3 BHK",
+      "area_sqft": 1350,
+      "predicted_price": 13126792.77,
+      "price_display": {
+        "total": "\u20b91.31 Crore",
+        "per_sqft": "\u20b99,724/sq.ft",
+        "image": "house_general.png",
+        "investment_score": 8.3,
+        "neighborhood_ratings": {
+          "Safety": 7,
+          "Connectivity": 9,
+          "Lifestyle": 7,
+          "Greenery": 6
+        },
+        "market_sentiment": "\ud83d\udcc8 Growing Value"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-23 21:45:35",
+      "city": "Hyderabad",
+      "property_type": "Builder Floor",
+      "bhk": "3 BHK",
+      "area_sqft": 1000,
+      "predicted_price": 11671894.08,
+      "price_display": {
+        "total": "\u20b91.17 Crore",
+        "per_sqft": "\u20b911,672/sq.ft",
+        "image": "house_general.png",
+        "investment_score": 7.8,
+        "neighborhood_ratings": {
+          "Safety": 7,
+          "Connectivity": 9,
+          "Lifestyle": 7,
+          "Greenery": 6
+        },
+        "market_sentiment": "\ud83d\udd25 High Demand"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-23 21:50:24",
+      "city": "Hyderabad",
+      "property_type": "Builder Floor",
+      "bhk": "3 BHK",
+      "area_sqft": 1000,
+      "predicted_price": 11671894.08,
+      "price_display": {
+        "total": "\u20b91.17 Crore",
+        "per_sqft": "\u20b911,672/sq.ft",
+        "image": "apartment_general.png",
+        "investment_score": 7.8,
+        "neighborhood_ratings": {
+          "Safety": 7,
+          "Connectivity": 9,
+          "Lifestyle": 7,
+          "Greenery": 6
+        },
+        "market_sentiment": "\ud83d\udd25 High Demand"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-23 21:50:39",
+      "city": "Delhi NCR",
+      "property_type": "Apartment",
+      "bhk": "2 BHK",
+      "area_sqft": 1000,
+      "predicted_price": 9000000.0,
+      "price_display": {
+        "total": "\u20b990.00 Lakh",
+        "per_sqft": "\u20b99,000/sq.ft",
+        "image": "delhi_house.png",
+        "investment_score": 9.0,
+        "neighborhood_ratings": {
+          "Safety": 7,
+          "Connectivity": 9,
+          "Lifestyle": 7,
+          "Greenery": 6
+        },
+        "market_sentiment": "\ud83d\udd25 High Demand"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-23 21:52:38",
+      "city": "Delhi NCR",
+      "property_type": "Apartment",
+      "bhk": "2 BHK",
+      "area_sqft": 1000,
+      "predicted_price": 9000000.0,
+      "price_display": {
+        "total": "\u20b990.00 Lakh",
+        "per_sqft": "\u20b99,000/sq.ft",
+        "image": "delhi_house.png",
+        "investment_score": 9.0,
+        "neighborhood_ratings": {
+          "Safety": 7,
+          "Connectivity": 9,
+          "Lifestyle": 7,
+          "Greenery": 6
+        },
+        "market_sentiment": "\ud83d\udd25 High Demand"
+      }
+    },
+    {
+      "user_email": "242300@sbsstc.ac.in",
+      "user_name": "Admin",
+      "timestamp": "2026-02-23 21:52:55",
+      "city": "Chandigarh",
+      "property_type": "Apartment",
+      "bhk": "2 BHK",
+      "area_sqft": 1000,
+      "predicted_price": 7000000.0,
+      "price_display": {
+        "total": "\u20b970.00 Lakh",
+        "per_sqft": "\u20b97,000/sq.ft",
+        "image": "apartment_general.png",
+        "investment_score": 9.5,
+        "neighborhood_ratings": {
+          "Safety": 7,
+          "Connectivity": 9,
+          "Lifestyle": 7,
+          "Greenery": 6
+        },
+        "market_sentiment": "\ud83d\udcc8 Growing Value"
+      }
+    }
+  ]
+}

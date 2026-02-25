@@ -1,0 +1,2 @@
+﻿Housing_Price_Predication_Project_Feature_Engineering.ipynb:797:    "from sklearn.preprocessing import MinMaxScaler"
+Housing_Price_Predication_Project_Feature_Engineering.ipynb:807:    "scaling=MinMaxScaler()"
