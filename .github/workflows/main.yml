@@ -9,25 +9,48 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    # 🍃 MongoDB service container for tests
+    services:
+      mongodb:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+
     steps:
     - uses: actions/checkout@v3
+
     - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
         python-version: "3.9"
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
+    - name: Set up environment variables
+      run: |
+        echo "FLASK_SECRET_KEY=ci-test-secret-key" >> $GITHUB_ENV
+        echo "ADMIN_EMAIL=admin@test.com" >> $GITHUB_ENV
+        echo "ADMIN_PASSWORD=test123" >> $GITHUB_ENV
+
+    - name: Wait for MongoDB to be ready
+      run: |
+        sleep 5
+
     - name: Run Tests
       run: |
-        python -m pytest
+        python -m pytest tests/ -v
 
   build-docker:
     needs: test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+
     - name: Build Docker Image
       run: |
         docker build -t housing-app:latest .
+        echo "✅ Docker image built successfully!"
