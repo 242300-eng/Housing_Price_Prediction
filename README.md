@@ -1,4 +1,4 @@
-# 🏠 Indian Housing Price Predictor 2026
+# 🏠 Aashiyana Insights AI 2026
 
 ![Python](https://img.shields.io/badge/Python-3.9-blue?style=for-the-badge&logo=python)
 ![Flask](https://img.shields.io/badge/Flask-2.x-lightgrey?style=for-the-badge&logo=flask)
@@ -9,7 +9,7 @@
 ![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen?style=for-the-badge&logo=pytest)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
-> An end-to-end, **production-ready** Machine Learning web application to predict property prices across **60+ major Indian cities**. Built for accuracy, scalability, and a premium user experience.
+> **Aashiyana Insights AI** is an end-to-end, **production-ready** Machine Learning web application to predict property prices across **60+ major Indian cities**. Built for accuracy, scalability, and a premium user experience.
 
 ---
 
@@ -163,8 +163,8 @@ pip install -r requirements.txt
 
 ### 4. Seed the Database
 ```bash
-python seed_db.py        # Seed city/pricing data
-python seed_areas.py     # Seed locality areas
+python migrate_to_mongo.py   # Populates MongoDB from JSON files
+python seed_areas.py         # Adds locality-specific data
 ```
 
 ### 5. Run the Application
@@ -172,6 +172,35 @@ python seed_areas.py     # Seed locality areas
 python app.py
 ```
 Visit: [http://localhost:5000](http://localhost:5000)
+
+---
+
+---
+
+## ☁️ Deployment on Render
+
+To deploy this project on [Render](https://render.com), follow these steps:
+
+1.  **Create a MongoDB Atlas Cluster**:
+    - Sign up at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+    - Create a free cluster and a database named `housing_db`.
+    - Get your connection string (e.g., `mongodb+srv://<user>:<password>@cluster0.mongodb.net/housing_db`).
+2.  **Create a New Web Service on Render**:
+    - Connect your GitHub repository.
+    - Select **Python** as the environment.
+    - Set **Build Command**: `pip install -r requirements.txt`
+    - Set **Start Command**: `gunicorn app:app`
+3.  **Configure Environment Variables**:
+    - `FLASK_SECRET_KEY`: A secure random string.
+    - `MONGO_URI`: Your MongoDB Atlas connection string.
+    - `ADMIN_EMAIL`: Your admin email.
+    - `ADMIN_PASSWORD`: Your admin password.
+4.  **Seed the Database**:
+    - Once deployed, you can use Render's "Shell" to run:
+      ```bash
+      python migrate_to_mongo.py
+      python seed_areas.py
+      ```
 
 ---
 
@@ -227,9 +256,12 @@ python -m pytest -v
 Housing_Price_Prediction/
 ├── app.py                    # Main Flask application
 ├── train_model.py            # ML model training script
-├── seed_db.py                # Database seed script
+├── migrate_to_mongo.py       # Database migration/seed script
 ├── seed_areas.py             # Locality areas seed script
+├── check_mongo.py            # MongoDB connection validator
+├── inspect_model.py          # Tool to inspect Random Forest features
 ├── requirements.txt          # Python dependencies
+├── LICENSE                   # MIT License file
 ├── Procfile                  # Deployment config
 ├── Dockerfile                # Docker container config
 ├── .dockerignore
@@ -239,7 +271,7 @@ Housing_Price_Prediction/
 │       └── main.yml          # CI/CD pipeline
 ├── static/
 │   ├── style.css             # Main stylesheet
-│   ├── enhancements.css      # Feature-specific styles
+│   ├── enhancements.js       # UI interactivity & Dark mode
 │   └── property_images/      # Property & city images
 ├── templates/
 │   ├── index.html            # Home / Prediction page

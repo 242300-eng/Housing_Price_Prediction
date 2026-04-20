@@ -3,6 +3,6 @@ python-dotenv
 scikit-learn
 numpy
 pandas
-pymongo
+pymongo[srv]
 gunicorn
 pytest

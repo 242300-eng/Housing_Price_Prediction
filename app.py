@@ -1,6 +1,4 @@
-'''
-@Author ---> Tufail Ahmad Mir
-'''
+# @Author ---> Tufail Ahmad Mir
 
 from flask import Flask,request,render_template,redirect,url_for,session,jsonify,flash
 
@@ -47,8 +45,9 @@ ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'admin@housing.com')
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', 'admin123')
 
 
-# MongoDB Connection
-client = MongoClient('mongodb://localhost:27017/')
+# --- MongoDB Configuration ---
+MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
+client = MongoClient(MONGO_URI)
 db = client['housing_db']
 
 # Mapping for property images with expanded city support

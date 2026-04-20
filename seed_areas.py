@@ -281,10 +281,10 @@ def seed_city_areas():
             {"$set": {"areas": areas}}
         )
         if result.matched_count:
-            print(f"  ✅ Updated {city_name} with {len(areas)} areas.")
+            print(f"  [DONE] Updated {city_name} with {len(areas)} areas.")
             updated += 1
         else:
-            print(f"  ⚠️  City not found in DB: {city_name}")
+            print(f"  [MISSING] City not found in DB: {city_name}")
 
     # Add default areas for any other city not explicitly listed
     default_areas = [

@@ -1,4 +1,4 @@
-// Enhanced JavaScript for Housing Price Prediction
+// Enhanced JavaScript for Aashiyana Insights AI
 
 // Show loading animation on form submit
 document.addEventListener('DOMContentLoaded', function () {
