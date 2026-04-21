@@ -496,13 +496,13 @@ def get_rent_prediction(city, property_type, area_sqft, locality_tier, furnishin
 def compare():
     user = session.get('user')
     
-    # Load and organize cities by state
-    with open('city_pricing_data.json', 'r', encoding='utf-8') as f:
-        pricing_data = json.load(f)
+    # Load and organize cities by state from MongoDB
+    cities = list(db.cities.find({}, {'name': 1, 'state': 1, '_id': 0}))
     
     cities_by_state = {}
-    for city, data in pricing_data['cities'].items():
-        state = data['state']
+    for city_doc in cities:
+        city = city_doc['name']
+        state = city_doc['state']
         if state not in cities_by_state:
             cities_by_state[state] = []
         cities_by_state[state].append(city)
@@ -682,13 +682,11 @@ def predict():
              }
              save_prediction(prediction_record)
 
-         # Load cities for results page dropdown
-         import json as _json
-         with open('city_pricing_data.json', 'r', encoding='utf-8') as _f:
-             _all = _json.load(_f)
+         # Load cities for results page dropdown from MongoDB
+         _cities = list(db.cities.find({}, {'name': 1, 'state': 1, '_id': 0}))
          _cbs = {}
-         for _cn, _cd in _all['cities'].items():
-             _cbs.setdefault(_cd['state'], []).append(_cn)
+         for _cd in _cities:
+             _cbs.setdefault(_cd['state'], []).append(_cd['name'])
          _ss = sorted(_cbs.keys())
          for _s in _ss:
              _cbs[_s].sort()
@@ -734,13 +732,13 @@ def dashboard():
 def rent():
     user = session.get('user')
     
-    # Load and organize cities by state
-    with open('city_pricing_data.json', 'r', encoding='utf-8') as f:
-        pricing_data = json.load(f)
+    # Load and organize cities by state from MongoDB
+    cities_list = list(db.cities.find({}, {'name': 1, 'state': 1, '_id': 0}))
     
     cities_by_state = {}
-    for city, data in pricing_data['cities'].items():
-        state = data['state']
+    for city_doc in cities_list:
+        city = city_doc['name']
+        state = city_doc['state']
         if state not in cities_by_state:
             cities_by_state[state] = []
         cities_by_state[state].append(city)
@@ -787,13 +785,13 @@ def rent():
 @app.route('/insights')
 def insights():
     user = session.get('user')
-    # Load and organize cities by state
-    with open('city_pricing_data.json', 'r', encoding='utf-8') as f:
-        pricing_data = json.load(f)
+    # Load and organize cities by state from MongoDB
+    cities_list = list(db.cities.find({}, {'name': 1, 'state': 1, '_id': 0}))
     
     cities_by_state = {}
-    for city, data in pricing_data['cities'].items():
-        state = data['state']
+    for city_doc in cities_list:
+        city = city_doc['name']
+        state = city_doc['state']
         if state not in cities_by_state:
             cities_by_state[state] = []
         cities_by_state[state].append(city)
